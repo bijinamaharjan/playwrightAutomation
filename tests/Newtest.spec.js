@@ -1,0 +1,92 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://dev-ohana.ktmbees.com/');
+//Login
+  await page.getByPlaceholder('Email').fill('pravin@ktmbees.com');
+  await page.getByPlaceholder('Password').click();
+  await page.getByPlaceholder('Password').fill('nepal');
+  await page.getByLabel('Remember me').check();
+  await page.getByRole('button', { name: 'Login' }).click();
+
+  //add property form
+  await page.getByText('PropertiesAdd PropertyS.').click();
+  await page.getByRole('button', { name: 'Add Property' }).click();
+  await page.getByPlaceholder('Select', { exact: true }).click();
+  await page.getByRole('option', { name: 'House', exact: true }).click();
+  await page.getByPlaceholder('Property Name').click();
+  await page.getByPlaceholder('Property Name').fill('Skyline House');
+  await page.getByPlaceholder('STREET 1').click();
+  await page.getByPlaceholder('STREET 1').fill('123 street');
+  await page.getByPlaceholder('CITY').click();
+  await page.getByPlaceholder('CITY').fill('Lewis center');
+  await page.getByPlaceholder('COUNTRY').click();
+  await page.getByPlaceholder('COUNTRY').press('CapsLock');
+  await page.getByPlaceholder('COUNTRY').fill('USA');
+  await page.getByPlaceholder('STATE').click();
+  await page.getByPlaceholder('STATE').fill('');
+  await page.getByPlaceholder('STATE').press('CapsLock');
+  await page.getByPlaceholder('STATE').fill('OH');
+  await page.getByRole('button', { name: 'Unit 1' }).click();
+  await page.getByPlaceholder('Unit Name').click();
+  await page.getByPlaceholder('Unit Name').fill('unit 111');
+  await page.getByPlaceholder('Unit ID').click();
+  await page.getByPlaceholder('Unit ID').fill('111');
+  await page.locator('div:nth-child(3) > .sun-editor > .se-container > .se-wrapper > div').first().click();
+  await page.locator('div').filter({ hasText: /^BED 0$/ }).getByRole('button').nth(1).click();
+  await page.locator('span').filter({ hasText: /^1$/ }).getByRole('button').nth(1).click();
+  await page.locator('div').filter({ hasText: /^FULL BATHS 0$/ }).getByRole('button').nth(1).dblclick();
+  await page.locator('span').filter({ hasText: /^0$/ }).getByRole('button').nth(1).click();
+  await page.locator('.mantine-Dropzone-root').first().click();
+  await page.getByPlaceholder('In Sq.ft').fill('1111');
+  await page.getByPlaceholder('RENT').fill('111');
+  await page.getByPlaceholder('LATE FEE').fill('111');
+  await page.getByPlaceholder('SECURITY DEPOSIT').fill('111');
+  await page.getByPlaceholder('LATE FEE').click();
+  await page.getByPlaceholder('OWNERSHIP TYPE').click();
+  await page.getByRole('option', { name: 'Joint tenancy' }).click();
+  await page.locator('.grid > div > div > .w-32 > .mantine-Dropzone-root').click();
+  await page.getByPlaceholder('Select Facilities').click();
+  await page.getByRole('option', { name: 'Gym' }).click();
+  await page.getByRole('option', { name: 'Parking' }).click();
+  await page.getByRole('option', { name: 'Balcony' }).click();
+  await page.locator('div').filter({ hasText: /^Document 1$/ }).nth(1).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+
+  //add owner form
+  await page.getByRole('button', { name: 'add-owner-icon Add Owner' }).click();
+  await page.getByPlaceholder('Unit').click();
+  await page.getByRole('option', { name: 'unit' }).click();
+  await page.getByPlaceholder('First name').click();
+  await page.getByPlaceholder('First name').fill('Alice');
+  await page.getByPlaceholder('Last name').click();
+  await page.getByPlaceholder('Last name').fill('Smith');
+  await page.getByPlaceholder('City').click();
+  await page.getByPlaceholder('City').fill('California');
+  await page.getByPlaceholder('Country').fill('USA');
+  await page.getByPlaceholder('City').dblclick();
+  await page.getByPlaceholder('City').fill('NewYork');
+  await page.getByPlaceholder('State').click();
+  await page.getByPlaceholder('State').fill('California');
+  await page.getByPlaceholder('Street 1').click();
+  await page.getByPlaceholder('Street 1').fill('NY-street111');
+  await page.getByPlaceholder('Primary Email').fill('alice11@gmail.com');
+  await page.getByPlaceholder('Phone number').fill('734834');
+  await page.getByPlaceholder('Enter from 0 to').fill('90');
+  await page.getByPlaceholder('Name', { exact: true }).click();
+  await page.getByPlaceholder('Name', { exact: true }).fill('Alice Smith');
+  await page.getByPlaceholder('Bank Name').click();
+  await page.getByPlaceholder('Bank Name').fill('Bank of USA');
+  await page.getByPlaceholder('Account Type').click();
+  await page.getByRole('option', { name: 'Saving' }).click();
+  await page.getByPlaceholder('Account Number').fill('389479837');
+  
+  await page.getByPlaceholder('Routing Number').fill('328u');
+  await page.getByPlaceholder('SSN').click();
+  await page.getByPlaceholder('SSN').fill('823');
+  await page.getByPlaceholder('Routing Number').click();
+  await page.getByPlaceholder('Routing Number').fill('328');
+  await page.getByRole('button', { name: 'Add Owner' }).click();
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.getByRole('button', { name: 'Submit' }).click();
+});
