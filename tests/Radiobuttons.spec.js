@@ -12,8 +12,10 @@ test('Handling Radio Buttons',async({page}) =>{
     const password = await page.fill('[type="password"]', 'ktm@123')
     await page.locator('[type="submit"]').click()
 
+    //Add new shipment button
     await page.locator('//button[3]').click()
 
+    
     await page.locator('//label[normalize-space()="Female"]').check()
     expect(page.locator('//label[normalize-space()="Female"]')).toBeChecked()
 
