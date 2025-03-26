@@ -1,31 +1,26 @@
 import {test,expect} from '@playwright/test'
 
 test('handling Dropdowns',async ({page}) =>{
-    await page.goto("https://admin-dev-agexpress.ktmbees.com/login")
+    await page.goto("https://dev.ebookingnepal.com/")
     await expect(page).toHaveTitle("")
-    await expect(page).toHaveURL("https://admin-dev-agexpress.ktmbees.com/login")
+    await expect(page).toHaveURL("https://dev.ebookingnepal.com/")
 
-    //Login
+    await page.getByRole('button', { name: 'Sign In' }).click();
+    await expect(page).toHaveURL('https://dev.ebookingnepal.com/signin')
+
     const email= await page.getByPlaceholder('Email')
-    await expect(email).toBeEnabled()
     await expect(email).toBeVisible()
-    await email.fill("sagar@ktmbees.com")
+    await expect(email).toBeEnabled()
+    await email.fill('maharjanbijina60@gmail.com')
 
-    const pw= await page.getByPlaceholder("Password").fill("ktm@123")
+    const password = page.getByPlaceholder('Password')
+    await expect(password).toBeEnabled()
+    await password.fill('Bijina1022')
 
     await page.locator('[type="submit"]').click()
-    
-    //Shipments page
-   await expect(page.getByText("Shipment sent")).toBeVisible()
-
-   //Add new shjipment button
-   await page.locator("div[class='text-white']").click()
-   await page.waitForURL("https://admin-dev-agexpress.ktmbees.com/dashboard/branch-admin/shipments/shipment-list/add")
-
-
-
-
-
+    await page.waitForTimeout(5000)
+    await page.getByText('Dashboard')
+    await page.waitForURL('https://dev.ebookingnepal.com/property-owner')
     
 
 })
