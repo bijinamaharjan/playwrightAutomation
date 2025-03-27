@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test'
 
-test('Handling Alerts',async({page}) =>{
+test.skip('Handling Alerts',async({page}) =>{
     await page.goto('https://admin-dev-agexpress.ktmbees.com/')
     
     await page.getByRole('button', { name: 'Request a Quote' }).click();
@@ -26,12 +26,38 @@ test('Handling Alerts',async({page}) =>{
         await dialog.accept()
 
     })
+})
 
-test('Alert with',async ({page}) =>{
+test.skip('Confirmation Alert',async ({page}) =>{
+    await page.goto('https://testautomationpractice.blogspot.com/')
+    await expect(page).toHaveURL('https://testautomationpractice.blogspot.com/')
 
+    await page.locator('#confirmBtn').click()
+    page.on('dialog', async dialog =>{
+        expect(dialog.type()).toContain('confirm')
+        expect(dialog.message()).toContain('Press a button')
+        await dialog.accept() //closes using ok button
+        // await dialog.dismiss() //closes using cancel button
 
+    await page.locator('//button[@id="confirmBtn"]').click()
+    await expect(page.locator('#demo')).toHaveText('You pressed OK!')
+
+    await page.waitForTimeout(5000)
+    
+
+    })
+})
+
+test('Prompt dialog', async({page})=>{
+page.on('dialog', async dialog =>{
+    expect(dialog.type()).toContain('prompt')
+    expect(dialog.message()).toContain('Please enter your name')
+    expect(dialog.defaultValue()).toContain('Harry Potter')
+    await page.accept('John')
+
+    await page.locator('#promptBtn').click()
+    await expect(page.locator("//p[@id='demo']").toHaveText('Hello John! How are you today?'))
 
 
 })
-
 })
